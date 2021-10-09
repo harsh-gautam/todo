@@ -104,10 +104,11 @@ label .bi-list {
 
 .sidebar nav ul li a {
   padding: 10px 20px;
-  display: block;
+  display: flex;
+  align-items: center;
   width: 100%;
   text-decoration: none;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   color: #000;
   text-align: left;
   opacity: 0;
@@ -116,6 +117,11 @@ label .bi-list {
 
 .sidebar nav ul li a:hover {
   background-color: #fff;
+}
+
+.sidebar nav ul li a .bi {
+  font-size: 0.8em;
+  margin-right: 8px;
 }
 
 .profile {
@@ -128,10 +134,86 @@ label .bi-list {
 }
 
 .profile img {
-  margin-bottom: 5px;
+  margin-bottom: 10px;
+  border: 1px solid #434343;
   border-radius: 50%;
+  width: 80px;
+  height: 80px;
 }
 
 .profile h1 {
   font-size: 1.3rem;
+}
+
+.home .welcome-text,
+.home .create,
+.home .insights {
+  margin: 30px 15px;
+  /* border: 1px solid #000; */
+  padding: 5px 10px;
+}
+
+.welcome-text h1 {
+  font-size: 2em;
+  font-weight: 700;
+}
+
+.welcome-text h2 {
+  font-size: 1.25em;
+  font-weight: normal;
+}
+
+.create {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 5px;
+}
+
+.create button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex: 1;
+  padding: 8px 12px;
+  font-size: 1em;
+  border: none;
+  border-radius: 45px;
+  cursor: pointer;
+}
+
+.create button .bi {
+  font-size: 1em;
+}
+
+.insights {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: space-evenly;
+}
+
+.card {
+  flex: auto;
+  width: 120px;
+  height: 120px;
+  background: rgba(222, 222, 222, 0.6);
+  border: 1px solid rgb(54, 34, 34);
+  border-radius: 10px;
+  padding: 20px 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: flex-start;
+}
+
+.card h3 {
+  font-size: 1.2em;
+  margin-bottom: 5px;
+}
+.card p {
+  font-size: 1em;
+  font-weight: normal;
 }
