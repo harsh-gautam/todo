@@ -10,58 +10,128 @@ body {
   font-family: "Ubuntu", sans-serif;
 }
 
-.header {
+.topbar {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
   background-color: aquamarine;
-  padding: 10px 30px;
+  padding: 10px 15px 10px 60px;
 }
 
-.header .brand {
+.topbar .brand {
   flex: 1;
   display: flex;
-  gap: 10px;
   align-items: center;
+  gap: 5px;
 }
 
-.header .profile {
-  flex: 1;
-  text-align: end;
+.topbar .brand .brand-logo {
+  font-size: 0.7em;
+}
+.topbar .brand .brand-name {
+  font-size: 1.6em;
 }
 
-.sidebar {
+.toggle-label {
+  z-index: 1;
+  position: absolute;
+  left: 14px;
+  top: 7px;
+}
+
+.sidebar input {
+  display: none;
+}
+
+.sidebar label {
+  cursor: pointer;
+}
+
+label .bi-x {
+  display: none;
+}
+
+label .bi-list {
+  display: inline-block;
+}
+
+#toggle:checked ~ nav {
+  transform: scale(1, 1);
+}
+
+#toggle:checked ~ nav ul li a {
+  opacity: 1;
+  transition: opacity ease-in-out 0.2s 0.15s;
+}
+#toggle:checked ~ nav ul li .profile {
+  opacity: 1;
+  transition: opacity ease-in-out 0.2s 0.15s;
+}
+
+#toggle:checked ~ label .bi-x {
+  display: flex;
+}
+
+#toggle:checked ~ label .bi-list {
+  display: none;
+}
+
+.bi {
+  font-size: 2em;
+}
+
+.sidebar nav {
+  z-index: 1;
   height: 100%;
-  width: 250px;
+  max-width: 220px;
+  width: 100%;
   position: fixed;
   left: 0;
-  background-color: aquamarine;
+  background-color: rgb(25, 199, 141);
+  transform: scale(0, 1);
+  transform-origin: left;
+  transition: all ease-in-out 0.3s;
 }
 
-.sidebar ul {
+.sidebar nav ul {
   display: flex;
   flex-direction: column;
-  list-style-type: none;
+
   margin-top: 30px;
 }
 
-.sidebar ul li {
+.sidebar nav ul li {
+  list-style-type: none;
 }
 
-.sidebar ul li a {
-  margin: 5px 0;
-  padding: 10px 30px;
+.sidebar nav ul li a {
+  padding: 10px 20px;
   display: block;
   width: 100%;
   text-decoration: none;
-  font-size: 1.5rem;
-  text-align: center;
+  font-size: 1.2rem;
+  color: #000;
+  text-align: left;
+  opacity: 0;
+  transition: opacity ease-in-out 0.15s;
 }
 
-.sidebar ul li a:hover {
+.sidebar nav ul li a:hover {
   background-color: #fff;
 }
 
-.not-clickable {
-  pointer-events: none;
+.profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+  opacity: 0;
+  transition: opacity ease-in-out 0.15s;
+}
+
+.profile img {
+  margin-bottom: 5px;
+  border-radius: 50%;
+}
+
+.profile h1 {
+  font-size: 1.3rem;
 }

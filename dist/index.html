@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TODO List</title>
+    <title>Tasker</title>
     <link rel="stylesheet" href="../src/css/style.css" />
     <link
       rel="stylesheet"
@@ -13,25 +13,35 @@
   </head>
   <body>
     <div class="container">
-      <header class="header">
-        <div class="topbar">
-          <i class="bi bi-"></i>
-          <div class="brand">
-            <span class="brand-logo">logo</span>
-            <h1 class="brand-name">Brand</h1>
-          </div>
-        </div>
-        <div class="profile">
-          <img src="#" alt="profile image" />
+      <header class="topbar">
+        <div class="brand">
+          <span class="brand-logo"><i class="bi bi-calendar3"></i></span>
+          <h1 class="brand-name">Tasker</h1>
         </div>
       </header>
-      <nav class="sidebar">
-        <ul>
-          <li class="item"><a href="#">Today</a></li>
-          <li class="item"><a href="#">This Week</a></li>
-          <li class="item not-clickable"><a href="#">Workspace</a></li>
-        </ul>
-      </nav>
+      <div class="sidebar">
+        <input type="checkbox" name="toggle" id="toggle" />
+
+        <nav>
+          <ul>
+            <li>
+              <div class="profile">
+                <img src="" alt="profile image" />
+                <h1>Harsh Gautam</h1>
+              </div>
+            </li>
+            <li class="item">
+              <a href="#">Home</a>
+            </li>
+            <li class="item"><a href="#">Today</a></li>
+            <li class="item"><a href="#">This Week</a></li>
+          </ul>
+        </nav>
+        <label for="toggle" class="toggle-label">
+          <i class="bi bi-list"></i>
+          <i class="bi bi-x"></i>
+        </label>
+      </div>
     </div>
   </body>
 </html>
