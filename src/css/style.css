@@ -37,6 +37,10 @@ body {
   top: 7px;
 }
 
+.bi {
+  font-size: 2em;
+}
+
 .sidebar input {
   display: none;
 }
@@ -72,10 +76,6 @@ label .bi-list {
 
 #toggle:checked ~ label .bi-list {
   display: none;
-}
-
-.bi {
-  font-size: 2em;
 }
 
 .sidebar nav {
@@ -156,6 +156,8 @@ label .bi-list {
 .welcome-text h1 {
   font-size: 2em;
   font-weight: 700;
+  letter-spacing: 1px;
+  line-height: 1.5em;
 }
 
 .welcome-text h2 {
@@ -163,27 +165,28 @@ label .bi-list {
   font-weight: normal;
 }
 
-.create {
+.btn-group {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
   gap: 5px;
 }
 
-.create button {
+.btn-group button,
+.tasks-toolbar button {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  flex: 1;
-  padding: 8px 12px;
+  padding: 8px 16px;
   font-size: 1em;
   border: none;
   border-radius: 45px;
   cursor: pointer;
 }
 
-.create button .bi {
+.btn-group button .bi,
+.tasks-toolbar button .bi {
   font-size: 1em;
 }
 
@@ -216,4 +219,67 @@ label .bi-list {
 .card p {
   font-size: 1em;
   font-weight: normal;
+}
+
+.tasks-container {
+  padding: 5px 15px;
+}
+
+.tasks-toolbar {
+  margin: 20px auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.sorting {
+  flex: 1;
+  display: flex;
+  justify-content: space-around;
+}
+.sorting select {
+  padding: 5px;
+  border: none;
+  background: beige;
+}
+.sorting select option {
+  padding: 5px;
+}
+.sorting button {
+  font-size: 1em;
+  padding: 5px 30px;
+}
+
+.task {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background-color: bisque;
+  margin: 15px 0;
+  padding: 10px;
+  transition: all ease-in-out 0.3s;
+}
+
+.task:hover {
+  transform: scale(1.02, 1);
+  box-shadow: 7px 7px 7px 0px rgb(0 0 0 / 30%);
+}
+
+.task .task-heading {
+  margin-right: auto;
+  cursor: pointer;
+}
+.task input {
+  cursor: pointer;
+}
+.task .time-stamp {
+  font-size: 0.85em;
+}
+.task span {
+  cursor: pointer;
+}
+
+.task .bi {
+  font-size: 1em;
 }

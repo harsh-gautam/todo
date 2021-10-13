@@ -10,6 +10,7 @@
       rel="stylesheet"
       href="../node_modules/bootstrap-icons/font/bootstrap-icons.css"
     />
+    <script src="index.bundle.js"></script>
   </head>
   <body>
     <div class="container">
@@ -49,36 +50,63 @@
           <i class="bi bi-x"></i>
         </label>
       </div>
-      <section class="home">
-        <div class="welcome-text">
-          <h1>Good Morning,</h1>
-          <h2>Harsh Gautam</h2>
+      <section class="tasks-container">
+        <div class="tasks-toolbar">
+          <button>New Task<i class="bi bi-plus-circle"></i></button>
+          <div class="sorting">
+            <select name="sortby" id="sortby">
+              <option value="name">Name</option>
+              <option value="priority">Priority</option>
+              <option value="date">Date</option>
+            </select>
+            <select name="sorttype" id="sorttype">
+              <option value="asc">Ascending</option>
+              <option value="dsc">Descending</option>
+            </select>
+            <button>Sort</button>
+          </div>
         </div>
-        <div class="create">
-          <button class="create-task">
-            <i class="bi bi-plus-circle"></i> Task
-          </button>
-          <button class="create-workspace">
-            <i class="bi bi-plus-circle"></i> Workspace
-          </button>
+        <div class="task" data-priority="high">
+          <input type="checkbox" name="task-complete" id="task-complete">
+          <p class="task-heading">Go on a walk</p>
+          <p class="time-stamp">tommorrow</p>
+          <span><i class="bi bi-pencil-square"></i></span>
+          <span><i class="bi bi-trash"></i></span>
         </div>
-        <div class="insights">
-          <div class="card">
-            <h3>Today</h3>
-            <p>3 tasks pending</p>
-          </div>
-          <div class="card">
-            <h3>This week</h3>
-            <p>10 tasks pending</p>
-          </div>
-          <div class="card">
-            <h3>Project: SketchPas</h3>
-            <p>24 tasks pending</p>
-          </div>
-          <div class="card">
-            <h3>Project: SketchPas</h3>
-            <p>24 tasks pending</p>
-          </div>
+        <div class="task" data-priority="high">
+          <input type="checkbox" name="task-complete" id="task-complete">
+          <p class="task-heading">Go on a walk</p>
+          <p class="time-stamp">tommorrow</p>
+          <span><i class="bi bi-pencil-square"></i></span>
+          <span><i class="bi bi-trash"></i></span>
+        </div>
+        <div class="task" data-priority="high">
+          <input type="checkbox" name="task-complete" id="task-complete">
+          <p class="task-heading">Go on a walk</p>
+          <p class="time-stamp">tommorrow</p>
+          <span><i class="bi bi-pencil-square"></i></span>
+          <span><i class="bi bi-trash"></i></span>
+        </div>
+        <div class="task" data-priority="high">
+          <input type="checkbox" name="task-complete" id="task-complete">
+          <p class="task-heading">Go on a walk</p>
+          <p class="time-stamp">tommorrow</p>
+          <span><i class="bi bi-pencil-square"></i></span>
+          <span><i class="bi bi-trash"></i></span>
+        </div>
+        <div class="task" data-priority="high">
+          <input type="checkbox" name="task-complete" id="task-complete">
+          <p class="task-heading">Go on a walk</p>
+          <p class="time-stamp">Nov 29th</p>
+          <span><i class="bi bi-pencil-square"></i></span>
+          <span><i class="bi bi-trash"></i></span>
+        </div>
+        <div class="task" data-priority="high">
+          <input type="checkbox" name="task-complete" id="task-complete">
+          <p class="task-heading">Go on a walk</p>
+          <p class="time-stamp">tommorrow</p>
+          <span><i class="bi bi-pencil-square"></i></span>
+          <span><i class="bi bi-trash"></i></span>
         </div>
       </section>
     </div>
