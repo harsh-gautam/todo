@@ -1,8 +1,18 @@
 import { createButtonGroup, createWelcomeDiv, createInsightsDiv } from "./home";
-import createElement, { createTask } from "./utility";
+import { createElement, createTask, convertDate } from "./utility";
 
-function addTaskToDOM() {
-  const newTask = createTask("Prepare for infosys", "24 Oct", "high");
+function addTaskToDOM(event) {
+  event.preventDefault();
+  const formData = event.target;
+  const title = formData.title.value;
+  const desc = formData.description.value;
+  const dueDate = formData.duedate.value;
+  const priority = formData.priority.value;
+
+  // console.log({ title, desc, dueDate, priority });
+  const readableDate = convertDate(dueDate);
+
+  const newTask = createTask(title, readableDate, priority);
   const taskContainer = document.querySelector(".tasks-container");
 
   taskContainer.appendChild(newTask);
@@ -12,21 +22,19 @@ function setupDOM() {
   const modal = document.querySelector("#id-modal-task");
   const createTask = document.querySelector("div.tasks-toolbar > button");
   const close = document.querySelector("div.modal-header > span");
-  const addTask = document.querySelector("div.modal-body > button");
+  const form = document.querySelector("div.modal-body > form");
 
-  addTask.addEventListener("click", addTaskToDOM);
+  form.addEventListener("submit", addTaskToDOM);
 
   createTask.addEventListener("click", () => {
     modal.style.display = "block";
   });
 
   close.addEventListener("click", () => {
-    console.log("clicked");
     modal.style.display = "none";
   });
 
   window.addEventListener("click", (e) => {
-    console.log("window clicked");
     if (e.target == modal) {
       modal.style.display = "none";
     }

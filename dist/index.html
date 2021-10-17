@@ -117,11 +117,12 @@
             <span class="close"><i class="bi bi-x"></i></span>
           </div>
           <div class="modal-body">
-            <input type="text" name="task-title" id="task-title" placeholder="Add title">
-            <input type="text" name="task-descript" id="task-descript" placeholder="Add description">
+            <form action="#">
+            <input type="text" name="title" id="task-title" placeholder="Add title">
+            <input type="text" name="description" id="task-descript" placeholder="Add description">
             <div class="row">
               <label for="task-due-date">Due date: </label>
-              <input type="date" name="task-due-date" id="task-due-date">
+              <input type="date" name="duedate" id="task-due-date">
             </div>
             <div class="row">
               <label for="task-priority">Priority: </label>
@@ -130,7 +131,7 @@
                   <input
                     type="radio"
                     id="priority-easy"
-                    name="task-priority"
+                    name="priority"
                     value="low"
                     checked
                   />
@@ -141,7 +142,7 @@
                   <input
                     type="radio"
                     id="priority-medium"
-                    name="task-priority"
+                    name="priority"
                     value="medium"
                   />
                 <label for="priority-medium" class="radio-label medium">
@@ -151,7 +152,7 @@
                   <input
                     type="radio"
                     id="priority-high"
-                    name="task-priority"
+                    name="priority"
                     value="high"
                   />
                 <label for="priority-high" class="radio-label high">
@@ -159,7 +160,8 @@
                 </label>
             </div>
             </div>
-            <button class="add-todo">Add todo</button>
+            <button type="submit" class="add-todo">Add todo</button>
+          </form>
 
           </div>
         </div>

@@ -42,4 +42,38 @@ function createTask(title, dueDate, pr) {
   return wrapper;
 }
 
-export { createElement, createTask };
+function convertDate(date) {
+  // date : yyyy-mm-dd, eg-> 2021-10-24
+  // output: 24th Oct
+
+  const months = [
+    "January",
+    "Febuary",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
+  let [year, month, day] = date.split("-");
+  month = months[month - 1].slice(0, 3);
+
+  if (day.slice(-1) == "1") {
+    day = day + "st";
+  } else if (day.slice(-1) == "2") {
+    day = day + "nd";
+  } else if (day.slice(-1) == "3") {
+    day = day + "rd";
+  } else {
+    day = day + "th";
+  }
+  return `${day} ${month}`;
+}
+
+export { createElement, createTask, convertDate };
