@@ -1,11 +1,20 @@
 import { createButtonGroup, createWelcomeDiv, createInsightsDiv } from "./home";
-import createElement from "./utility";
+import createElement, { createTask } from "./utility";
+
+function addTaskToDOM() {
+  const newTask = createTask("Prepare for infosys", "24 Oct", "high");
+  const taskContainer = document.querySelector(".tasks-container");
+
+  taskContainer.appendChild(newTask);
+}
 
 function setupDOM() {
   const modal = document.querySelector("#id-modal-task");
   const createTask = document.querySelector("div.tasks-toolbar > button");
   const close = document.querySelector("div.modal-header > span");
-  console.log(close);
+  const addTask = document.querySelector("div.modal-body > button");
+
+  addTask.addEventListener("click", addTaskToDOM);
 
   createTask.addEventListener("click", () => {
     modal.style.display = "block";
