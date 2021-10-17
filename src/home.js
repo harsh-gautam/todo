@@ -1,4 +1,4 @@
-import createElement from "./htmlUtility";
+import createElement from "./utility";
 
 function createCard(title, subtext, classes = [], id = "") {
   const card = createElement("div", ["card", ...classes]);
