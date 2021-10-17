@@ -10,7 +10,7 @@
       rel="stylesheet"
       href="../node_modules/bootstrap-icons/font/bootstrap-icons.css"
     />
-    <script src="index.bundle.js"></script>
+    <script defer src="index.bundle.js"></script>
   </head>
   <body>
     <div class="container">
@@ -52,7 +52,7 @@
       </div>
       <section class="tasks-container">
         <div class="tasks-toolbar">
-          <button>New Task<i class="bi bi-plus-circle"></i></button>
+          <button class="task-btn">New Task<i class="bi bi-plus-circle"></i></button>
           <div class="sorting">
             <select name="sortby" id="sortby">
               <option value="name">Name</option>
@@ -109,6 +109,61 @@
           <span><i class="bi bi-trash"></i></span>
         </div>
       </section>
+
+      <div id="id-modal-task" class="modal">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2>Create task</h2>
+            <span class="close"><i class="bi bi-x"></i></span>
+          </div>
+          <div class="modal-body">
+            <input type="text" name="task-title" id="task-title" placeholder="Add title">
+            <input type="text" name="task-descript" id="task-descript" placeholder="Add description">
+            <div class="row">
+              <label for="task-due-date">Due date: </label>
+              <input type="date" name="task-due-date" id="task-due-date">
+            </div>
+            <div class="row">
+              <label for="task-priority">Priority: </label>
+              <div class="radio-wrapper" id="task-priority">
+                
+                  <input
+                    type="radio"
+                    id="priority-easy"
+                    name="task-priority"
+                    value="low"
+                    checked
+                  />
+                <label for="priority-easy" class="radio-label low">
+                  Low
+                </label>
+                
+                  <input
+                    type="radio"
+                    id="priority-medium"
+                    name="task-priority"
+                    value="medium"
+                  />
+                <label for="priority-medium" class="radio-label medium">
+                  Medium
+                </label>
+                
+                  <input
+                    type="radio"
+                    id="priority-high"
+                    name="task-priority"
+                    value="high"
+                  />
+                <label for="priority-high" class="radio-label high">
+                  High
+                </label>
+            </div>
+            </div>
+            <button class="add-todo">Add todo</button>
+
+          </div>
+        </div>
+      </div>
     </div>
   </body>
 </html>
