@@ -1,13 +1,28 @@
 import { createButtonGroup, createWelcomeDiv, createInsightsDiv } from "./home";
-import createElement from "./htmlUtility";
+import createElement from "./utility";
 
-function showModal() {
+function setupDOM() {
   const modal = document.querySelector("#id-modal-task");
-  modal.style.display = "block";
-}
+  const createTask = document.querySelector("div.tasks-toolbar > button");
+  const close = document.querySelector("div.modal-header > span");
+  console.log(close);
 
-const createTask = document.querySelector("div.tasks-toolbar > button");
-createTask.addEventListener("click", showModal);
+  createTask.addEventListener("click", () => {
+    modal.style.display = "block";
+  });
+
+  close.addEventListener("click", () => {
+    console.log("clicked");
+    modal.style.display = "none";
+  });
+
+  window.addEventListener("click", (e) => {
+    console.log("window clicked");
+    if (e.target == modal) {
+      modal.style.display = "none";
+    }
+  });
+}
 
 function setupHome() {
   console.log("Setup");
@@ -19,4 +34,4 @@ function setupHome() {
   container.appendChild(section);
 }
 
-// document.addEventListener("DOMContentLoaded", setupHome);
+document.addEventListener("DOMContentLoaded", setupDOM);

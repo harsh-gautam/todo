@@ -314,6 +314,15 @@ label .bi-list {
   align-items: center;
   justify-content: space-between;
 }
+
+.modal-header .close {
+  cursor: pointer;
+  font-size: 0.8em;
+}
+.modal-header .close:hover {
+  color: #000;
+}
+
 .modal-body {
   flex: 1;
   padding: 12px 8px;
