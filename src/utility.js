@@ -76,4 +76,5 @@ function convertDate(date) {
   return `${day} ${month}`;
 }
 
-export { createElement, createTask, convertDate };
+export { createTask, convertDate };
+export default createElement;
