@@ -4,7 +4,6 @@ function saveToLocal(data) {
   console.log("Saving data...");
   const id = generateId();
   data.id = id;
-  console.log(data);
 
   if (id === 1) {
     localStorage.setItem("tasks", JSON.stringify([data]));
@@ -13,6 +12,7 @@ function saveToLocal(data) {
     prev.push(data);
     localStorage.setItem("tasks", JSON.stringify(prev));
   }
+  return id;
 }
 
 function generateId() {
@@ -23,4 +23,20 @@ function generateId() {
   return 1;
 }
 
-export { saveToLocal };
+function loadFromLocal() {
+  const data = JSON.parse(localStorage.getItem("tasks"));
+  if (data !== null || data !== undefined) {
+    return data;
+  }
+}
+
+function removeFromLocal(id) {
+  const data = JSON.parse(localStorage.getItem("tasks"));
+  if (data !== null || data !== undefined) {
+    const newData = data.filter((item) => item.id != id);
+    // console.log(newData);
+    localStorage.setItem("tasks", JSON.stringify(newData));
+  }
+}
+
+export { saveToLocal, loadFromLocal, removeFromLocal };

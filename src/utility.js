@@ -9,7 +9,7 @@ function createElement(type, classes = [], id = "") {
   return element;
 }
 
-function createTask(title, dueDate, pr) {
+function createTask(title, dueDate, pr, id) {
   // checkbox
   const checkbox = createElement("input", [], "task-complete");
   checkbox.name = "task-complete";
@@ -37,6 +37,7 @@ function createTask(title, dueDate, pr) {
 
   const wrapper = createElement("div", ["task"]);
   wrapper.dataset.priority = pr;
+  wrapper.id = id;
   wrapper.append(checkbox, titleElem, timeElem, editElem, delElem);
 
   return wrapper;
