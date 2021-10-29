@@ -3,8 +3,8 @@ function saveToLocal(data) {
   // @output: id
   console.log("Saving data...");
   const savedData = JSON.parse(localStorage.getItem("tasks"));
-  const id = generateId();
-  if (savedData != null || savedData != undefined) {
+  const id = generateId(savedData);
+  if (savedData != null || savedData != undefined || savedData.length != 0) {
     // If data already exists update it
     let dataToUpdate = savedData.filter((d) => d.id == data.id)[0];
     if (dataToUpdate != null || dataToUpdate != undefined) {
@@ -32,17 +32,14 @@ function saveToLocal(data) {
   return id;
 }
 
-function generateId() {
-  let data = JSON.parse(localStorage.getItem("tasks"));
-  if (data !== null) {
-    return data.slice(-1)[0].id + 1;
-  }
-  return 1;
+function generateId(data) {
+  if (data.length == 0) return 1;
+  return data.slice(-1)[0].id + 1;
 }
 
 function loadFromLocal() {
   const data = JSON.parse(localStorage.getItem("tasks"));
-  if (data != null || data != undefined) {
+  if (data != null || data != undefined || data.length != 0) {
     return data;
   } else {
     return [];
@@ -51,9 +48,8 @@ function loadFromLocal() {
 
 function removeFromLocal(id) {
   const data = JSON.parse(localStorage.getItem("tasks"));
-  if (data !== null || data !== undefined) {
+  if (data != null || data != undefined) {
     const newData = data.filter((item) => item.id != id);
-    // console.log(newData);
     localStorage.setItem("tasks", JSON.stringify(newData));
   }
 }
