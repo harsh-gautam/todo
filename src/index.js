@@ -1,4 +1,9 @@
-import { loadFromLocal, removeFromLocal, saveToLocal } from "./db";
+import {
+  loadFromLocal,
+  removeFromLocal,
+  saveToLocal,
+  getTaskFromDB,
+} from "./db";
 import { createButtonGroup, createWelcomeDiv, createInsightsDiv } from "./home";
 import createElement, { createTask, convertDate } from "./utility";
 
@@ -11,16 +16,44 @@ function addTaskToDOM(data) {
   taskContainer.appendChild(newTask);
 }
 
-function extractFormData(event) {
-  event.preventDefault();
-  const formData = event.target;
-  const title = formData.title.value;
-  const desc = formData.description.value;
-  const dueDate = formData.duedate.value;
-  const priority = formData.priority.value;
+function UpdateTaskOnDOM(data) {
+  const tasks = document.querySelectorAll(".task");
+  tasks.forEach((task) => {
+    if (task.id == data.id) {
+      console.log("Updating DOM");
+      if (data.title.length > 18) data.title = data.title.slice(0, 17) + "...";
+      task.childNodes[1].textContent = data.title;
+      const readableDate = convertDate(data.dueDate);
+      task.childNodes[2].textContent = readableDate;
+    }
+  });
+}
 
-  id = saveToLocal({ title, desc, dueDate, priority });
+function extractFormData(form) {
+  const title = form.title.value;
+  const id = form.id.value;
+  const desc = form.description.value;
+  const dueDate = form.duedate.value;
+  const priority = form.priority.value;
+  return { title, desc, dueDate, priority, id };
+}
+
+function addData(event) {
+  event.preventDefault();
+  const data = extractFormData(event.target);
+
+  const id = saveToLocal(data);
+  const { title, dueDate, priority } = data;
   addTaskToDOM({ title, dueDate, priority, id });
+}
+
+function updateData(event) {
+  event.preventDefault();
+  const data = extractFormData(event.target);
+  saveToLocal(data);
+  document.querySelector(".close-edit").click();
+
+  UpdateTaskOnDOM(data);
 }
 
 function removeTaskFromDOM(target) {
@@ -33,9 +66,20 @@ function loadTasks() {
   const taskContainer = document.querySelector(".tasks");
   taskContainer.innerHTML = "";
   const data = loadFromLocal();
+
   for (let d of data) {
     addTaskToDOM(d);
   }
+}
+
+function editTask(id) {
+  const task = getTaskFromDB(id);
+  const form = document.querySelector("div#id-modal-editTask form");
+  form[0].value = id;
+  form[1].value = task.title;
+  form[2].value = task.desc;
+  form[3].value = task.dueDate;
+  form[4].value = task.priority;
 }
 
 // Initial Setup
@@ -52,10 +96,13 @@ function setupDOM() {
     ".task > span > .bi-pencil-square"
   );
   const delBtns = document.querySelectorAll(".task > span > .bi-trash");
+  const form = document.querySelector("div#id-modal-task form");
+  const editForm = document.querySelector("div#id-modal-editTask form");
 
   editBtns.forEach((edit) =>
-    edit.addEventListener("click", () => {
+    edit.addEventListener("click", (e) => {
       modalEdit.style.display = "block";
+      editTask(e.target.parentNode.parentNode.id);
     })
   );
   delBtns.forEach((del) =>
@@ -64,8 +111,8 @@ function setupDOM() {
     })
   );
 
-  const form = document.querySelector("div.modal-body > form");
-  form.addEventListener("submit", extractFormData);
+  form.addEventListener("submit", addData);
+  editForm.addEventListener("submit", updateData);
 
   createTask.addEventListener("click", () => {
     modal.style.display = "block";

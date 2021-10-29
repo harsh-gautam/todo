@@ -2,15 +2,32 @@ function saveToLocal(data) {
   // @params: data object
   // @output: id
   console.log("Saving data...");
+  const savedData = JSON.parse(localStorage.getItem("tasks"));
   const id = generateId();
-  data.id = id;
+  if (savedData != null || savedData != undefined) {
+    // If data already exists update it
+    let dataToUpdate = savedData.filter((d) => d.id == data.id)[0];
+    if (dataToUpdate != null || dataToUpdate != undefined) {
+      console.log("Updating data...");
+      const newData = savedData.map((d) => {
+        if ((d.id = data.id)) {
+          d = data;
+        }
+        return d;
+      });
+      localStorage.setItem("tasks", JSON.stringify(newData));
+      return;
+    } else {
+      data.id = id;
 
-  if (id === 1) {
-    localStorage.setItem("tasks", JSON.stringify([data]));
+      if (savedData != null || savedData != undefined) {
+        savedData.push(data);
+        localStorage.setItem("tasks", JSON.stringify(savedData));
+      }
+    }
   } else {
-    let prev = JSON.parse(localStorage.getItem("tasks"));
-    prev.push(data);
-    localStorage.setItem("tasks", JSON.stringify(prev));
+    data.id = id;
+    localStorage.setItem("tasks", JSON.stringify([data]));
   }
   return id;
 }
@@ -25,8 +42,10 @@ function generateId() {
 
 function loadFromLocal() {
   const data = JSON.parse(localStorage.getItem("tasks"));
-  if (data !== null || data !== undefined) {
+  if (data != null || data != undefined) {
     return data;
+  } else {
+    return [];
   }
 }
 
@@ -39,4 +58,9 @@ function removeFromLocal(id) {
   }
 }
 
-export { saveToLocal, loadFromLocal, removeFromLocal };
+function getTaskFromDB(id) {
+  const data = JSON.parse(localStorage.getItem("tasks"));
+  return data.filter((d) => d.id == id)[0];
+}
+
+export { saveToLocal, loadFromLocal, removeFromLocal, getTaskFromDB };
