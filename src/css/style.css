@@ -423,3 +423,18 @@ label .bi-list {
   color: #fff;
   background: #057cf4;
 }
+
+.task > input:checked ~ p {
+  text-decoration: line-through;
+  color: grey;
+}
+
+.task > input:checked ~ span {
+  color: grey;
+}
+.task > input:checked ~ span .bi-pencil-square {
+  pointer-events: none;
+}
+.task > input:checked ~ span .bi-trash:hover {
+  color: red;
+}

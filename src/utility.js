@@ -9,11 +9,12 @@ function createElement(type, classes = [], id = "") {
   return element;
 }
 
-function createTask(title, dueDate, pr, id) {
+function createTask(title, dueDate, pr, status, id) {
   // checkbox
   const checkbox = createElement("input", [], "task-complete");
   checkbox.name = "task-complete";
   checkbox.type = "checkbox";
+  checkbox.checked = status;
 
   // title
   const titleElem = createElement("p", ["task-heading"]);

@@ -59,4 +59,21 @@ function getTaskFromDB(id) {
   return data.filter((d) => d.id == id)[0];
 }
 
-export { saveToLocal, loadFromLocal, removeFromLocal, getTaskFromDB };
+function updateStatus(id, status) {
+  const data = JSON.parse(localStorage.getItem("tasks"));
+  const newData = data.map((d) => {
+    if (d.id == id) {
+      d.status = status;
+    }
+    return d;
+  });
+  localStorage.setItem("tasks", JSON.stringify(newData));
+}
+
+export {
+  saveToLocal,
+  loadFromLocal,
+  removeFromLocal,
+  getTaskFromDB,
+  updateStatus,
+};

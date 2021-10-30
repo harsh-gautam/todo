@@ -3,6 +3,7 @@ import {
   removeFromLocal,
   saveToLocal,
   getTaskFromDB,
+  updateStatus,
 } from "./db";
 import { createButtonGroup, createWelcomeDiv, createInsightsDiv } from "./home";
 import createElement, { createTask, convertDate } from "./utility";
@@ -10,7 +11,13 @@ import createElement, { createTask, convertDate } from "./utility";
 // Add new task to DOM
 function addTaskToDOM(data) {
   const readableDate = convertDate(data.dueDate);
-  const newTask = createTask(data.title, readableDate, data.priority, data.id);
+  const newTask = createTask(
+    data.title,
+    readableDate,
+    data.priority,
+    data.status,
+    data.id
+  );
   const taskContainer = document.querySelector(".tasks");
 
   taskContainer.appendChild(newTask);
@@ -41,10 +48,11 @@ function extractFormData(form) {
 function addData(event) {
   event.preventDefault();
   const data = extractFormData(event.target);
+  data["status"] = false;
 
   const id = saveToLocal(data);
-  const { title, dueDate, priority } = data;
-  addTaskToDOM({ title, dueDate, priority, id });
+  const { title, dueDate, priority, status } = data;
+  addTaskToDOM({ title, dueDate, priority, status, id });
 }
 
 function updateData(event) {
@@ -98,6 +106,15 @@ function setupDOM() {
   const delBtns = document.querySelectorAll(".task > span > .bi-trash");
   const form = document.querySelector("div#id-modal-task form");
   const editForm = document.querySelector("div#id-modal-editTask form");
+  const checkboxes = document.querySelectorAll(".task > input");
+
+  checkboxes.forEach((checkbox) => {
+    checkbox.addEventListener("click", (e) => {
+      const id = e.target.parentNode.id;
+      const status = e.target.checked;
+      updateStatus(id, status);
+    });
+  });
 
   editBtns.forEach((edit) =>
     edit.addEventListener("click", (e) => {
