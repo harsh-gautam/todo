@@ -12,6 +12,7 @@ import createElement, {
   convertDate,
   getTodayDate,
   tasksBoilerplate,
+  getNextSaturday,
 } from "./utility";
 
 // Add new task to DOM
@@ -145,6 +146,22 @@ function setupTodayScreen() {
   // addTaskToDOM(todayTasks);
 }
 
+function setupWeeklyScreen() {
+  const content = document.querySelector(".content");
+  content.style.opacity = 0;
+
+  content.innerHTML = "";
+  content.appendChild(tasksBoilerplate());
+
+  const tasks = getAllTasks();
+  const nextSaturday = getNextSaturday();
+  const weeklyTasks = tasks.filter((task) => task.dueDate < nextSaturday);
+  weeklyTasks.map((task) => addTaskToDOM(task));
+  content.style.opacity = 1;
+  // addTaskToDOM(todayTasks);
+  // console.log(nextSaturday);
+}
+
 function setupHome() {
   const content = document.querySelector(".content");
   content.style.opacity = 0;
@@ -175,10 +192,16 @@ function setupDOM() {
 
   const todayLink = document.querySelector(".today");
   const homeLink = document.querySelector(".home");
+  const weekLink = document.querySelector(".week");
 
   todayLink.addEventListener("click", (e) => {
     e.preventDefault();
     setupTodayScreen();
+    setupListeners();
+  });
+  weekLink.addEventListener("click", (e) => {
+    e.preventDefault();
+    setupWeeklyScreen();
     setupListeners();
   });
 
