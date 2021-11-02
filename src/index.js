@@ -1,4 +1,5 @@
 import {
+  getAllTasks,
   loadFromLocal,
   removeFromLocal,
   saveToLocal,
@@ -6,7 +7,12 @@ import {
   updateStatus,
 } from "./db";
 import { createButtonGroup, createWelcomeDiv, createInsightsDiv } from "./home";
-import createElement, { createTask, convertDate } from "./utility";
+import createElement, {
+  createTask,
+  convertDate,
+  getTodayDate,
+  tasksBoilerplate,
+} from "./utility";
 
 // Add new task to DOM
 function addTaskToDOM(data) {
@@ -90,23 +96,14 @@ function editTask(id) {
   form[4].value = task.priority;
 }
 
-// Initial Setup
-function setupDOM() {
-  const modal = document.querySelector("#id-modal-task");
-  const modalEdit = document.querySelector("#id-modal-editTask");
-
-  loadTasks();
-
+function setupListeners() {
   const createTask = document.querySelector("div.tasks-toolbar > button");
-  const close = document.querySelector(".close");
-  const closeEdit = document.querySelector(".close-edit");
   const editBtns = document.querySelectorAll(
     ".task > span > .bi-pencil-square"
   );
   const delBtns = document.querySelectorAll(".task > span > .bi-trash");
-  const form = document.querySelector("div#id-modal-task form");
-  const editForm = document.querySelector("div#id-modal-editTask form");
   const checkboxes = document.querySelectorAll(".task > input");
+  const modal = document.querySelector("#id-modal-task");
 
   checkboxes.forEach((checkbox) => {
     checkbox.addEventListener("click", (e) => {
@@ -128,12 +125,70 @@ function setupDOM() {
     })
   );
 
-  form.addEventListener("submit", addData);
-  editForm.addEventListener("submit", updateData);
-
   createTask.addEventListener("click", () => {
     modal.style.display = "block";
   });
+}
+
+function setupTodayScreen() {
+  const content = document.querySelector(".content");
+  content.style.opacity = 0;
+
+  content.innerHTML = "";
+  content.appendChild(tasksBoilerplate());
+
+  const tasks = getAllTasks();
+  const todayDate = getTodayDate();
+  const todayTasks = tasks.filter((task) => task.dueDate == todayDate);
+  todayTasks.map((task) => addTaskToDOM(task));
+  content.style.opacity = 1;
+  // addTaskToDOM(todayTasks);
+}
+
+function setupHome() {
+  const content = document.querySelector(".content");
+  content.style.opacity = 0;
+
+  content.innerHTML = "";
+  console.log("Setup");
+  // Home section
+  const section = createElement("section", ["home-container"]);
+  section.append(createWelcomeDiv(), createButtonGroup(), createInsightsDiv());
+
+  content.appendChild(section);
+  content.style.opacity = 1;
+}
+
+// Initial Setup
+function setupDOM() {
+  setupHome();
+  const modal = document.querySelector("#id-modal-task");
+  const modalEdit = document.querySelector("#id-modal-editTask");
+
+  // loadTasks();
+
+  const close = document.querySelector(".close");
+  const closeEdit = document.querySelector(".close-edit");
+
+  const form = document.querySelector("div#id-modal-task form");
+  const editForm = document.querySelector("div#id-modal-editTask form");
+
+  const todayLink = document.querySelector(".today");
+  const homeLink = document.querySelector(".home");
+
+  todayLink.addEventListener("click", (e) => {
+    e.preventDefault();
+    setupTodayScreen();
+    setupListeners();
+  });
+
+  homeLink.addEventListener("click", (e) => {
+    e.preventDefault();
+    setupHome();
+  });
+
+  form.addEventListener("submit", addData);
+  editForm.addEventListener("submit", updateData);
 
   close.addEventListener("click", (e) => {
     modal.style.display = "none";
@@ -149,16 +204,6 @@ function setupDOM() {
       modalEdit.style.display = "none";
     }
   });
-}
-
-function setupHome() {
-  console.log("Setup");
-  // Home section
-  const section = createElement("section", ["home"]);
-  section.append(createWelcomeDiv(), createButtonGroup(), createInsightsDiv());
-
-  const container = document.querySelector(".container");
-  container.appendChild(section);
 }
 
 document.addEventListener("DOMContentLoaded", setupDOM);

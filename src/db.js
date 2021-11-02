@@ -1,3 +1,7 @@
+function getAllTasks() {
+  return JSON.parse(localStorage.getItem("tasks"));
+}
+
 function saveToLocal(data) {
   // @params: data object
   // @output: id
@@ -71,6 +75,7 @@ function updateStatus(id, status) {
 }
 
 export {
+  getAllTasks,
   saveToLocal,
   loadFromLocal,
   removeFromLocal,

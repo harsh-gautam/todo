@@ -10,6 +10,10 @@ body {
   font-family: "Ubuntu", sans-serif;
 }
 
+.content {
+  transition: all 0.2s ease-in-out;
+}
+
 .topbar {
   display: flex;
   background-color: aquamarine;
@@ -145,9 +149,9 @@ label .bi-list {
   font-size: 1.3rem;
 }
 
-.home .welcome-text,
-.home .create,
-.home .insights {
+.home-container .welcome-text,
+.home-container .create,
+.home-container .insights {
   margin: 30px 15px;
   /* border: 1px solid #000; */
   padding: 5px 10px;

@@ -45,7 +45,8 @@ function createTask(title, dueDate, pr, status, id) {
 }
 
 function convertDate(date) {
-  // date : yyyy-mm-dd, eg-> 2021-10-24
+  // date : string
+  // format: yyyy-mm-dd, eg-> 2021-10-24
   // output: 24th Oct
 
   const months = [
@@ -78,5 +79,39 @@ function convertDate(date) {
   return `${day} ${month}`;
 }
 
-export { createTask, convertDate };
+function getTodayDate() {
+  const today = new Date();
+  const dd = String(today.getDate()).padStart(2, "0");
+  const mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+  const yyyy = today.getFullYear();
+
+  return `${yyyy}-${mm}-${dd}`;
+}
+
+function tasksBoilerplate() {
+  let container = createElement("section", ["tasks-container"]);
+  container.innerHTML = `<div class="tasks-toolbar">
+        <button class="task-btn">
+          New Task<i class="bi bi-plus-circle"></i>
+        </button>
+        <div class="sorting">
+          <select name="sortby" id="sortby">
+            <option value="name">Name</option>
+            <option value="priority">Priority</option>
+            <option value="date">Date</option>
+          </select>
+          <select name="sorttype" id="sorttype">
+            <option value="asc">Ascending</option>
+            <option value="dsc">Descending</option>
+          </select>
+          <button>Sort</button>
+        </div>
+      </div>
+      <div class="tasks">
+        
+      </div>`;
+  return container;
+}
+
+export { createTask, convertDate, getTodayDate, tasksBoilerplate };
 export default createElement;

@@ -35,13 +35,17 @@
               </div>
             </li>
             <li class="item">
-              <a href="#"><i class="bi bi-house"></i>Home</a>
+              <a href="#" class="home"><i class="bi bi-house"></i>Home</a>
             </li>
             <li class="item">
-              <a href="#"><i class="bi bi-clock-history"></i>Today</a>
+              <a href="#" class="today"
+                ><i class="bi bi-clock-history"></i>Today</a
+              >
             </li>
             <li class="item">
-              <a href="#"><i class="bi bi-calendar4-week"></i>This Week</a>
+              <a href="#" class="week"
+                ><i class="bi bi-calendar4-week"></i>This Week</a
+              >
             </li>
           </ul>
         </nav>
@@ -50,70 +54,7 @@
           <i class="bi bi-x"></i>
         </label>
       </div>
-      <section class="tasks-container">
-        <div class="tasks-toolbar">
-          <button class="task-btn">
-            New Task<i class="bi bi-plus-circle"></i>
-          </button>
-          <div class="sorting">
-            <select name="sortby" id="sortby">
-              <option value="name">Name</option>
-              <option value="priority">Priority</option>
-              <option value="date">Date</option>
-            </select>
-            <select name="sorttype" id="sorttype">
-              <option value="asc">Ascending</option>
-              <option value="dsc">Descending</option>
-            </select>
-            <button>Sort</button>
-          </div>
-        </div>
-        <div class="tasks">
-          <!--
-        <div id="1" class="task" data-priority="high">
-          <input type="checkbox" name="task-complete" id="task-complete" />
-          <p class="task-heading">Go on a walk</p>
-          <p class="time-stamp">tommorrow</p>
-          <span><i class="bi bi-pencil-square"></i></span>
-          <span><i class="bi bi-trash"></i></span>
-        </div>
-        <div id="2" class="task" data-priority="high">
-          <input type="checkbox" name="task-complete" id="task-complete" />
-          <p class="task-heading">Go on a walk</p>
-          <p class="time-stamp">tommorrow</p>
-          <span><i class="bi bi-pencil-square"></i></span>
-          <span><i class="bi bi-trash"></i></span>
-        </div>
-        <div id="3" class="task" data-priority="high">
-          <input type="checkbox" name="task-complete" id="task-complete" />
-          <p class="task-heading">Go on a walk</p>
-          <p class="time-stamp">tommorrow</p>
-          <span><i class="bi bi-pencil-square"></i></span>
-          <span><i class="bi bi-trash"></i></span>
-        </div>
-        <div id="4" class="task" data-priority="high">
-          <input type="checkbox" name="task-complete" id="task-complete" />
-          <p class="task-heading">Go on a walk</p>
-          <p class="time-stamp">tommorrow</p>
-          <span><i class="bi bi-pencil-square"></i></span>
-          <span><i class="bi bi-trash"></i></span>
-        </div>
-        <div id="5" class="task" data-priority="high">
-          <input type="checkbox" name="task-complete" id="task-complete" />
-          <p class="task-heading">Go on a walk</p>
-          <p class="time-stamp">Nov 29th</p>
-          <span><i class="bi bi-pencil-square"></i></span>
-          <span><i class="bi bi-trash"></i></span>
-        </div>
-        <div id="6" class="task" data-priority="high">
-          <input type="checkbox" name="task-complete" id="task-complete" />
-          <p class="task-heading">Go on a walk</p>
-          <p class="time-stamp">tommorrow</p>
-          <span><i class="bi bi-pencil-square"></i></span>
-          <span><i class="bi bi-trash"></i></span>
-        </div> -->
-        </div>
-      </section>
+      <div class="content"></div>
 
       <div id="id-modal-task" class="modal">
         <div class="modal-content">
