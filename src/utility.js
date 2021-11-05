@@ -88,14 +88,15 @@ function getTodayDate() {
   return `${yyyy}-${mm}-${dd}`;
 }
 
-function getNextSaturday() {
+function getThisWeek() {
   const today = new Date();
   today.setDate(today.getDate() + ((6 + (7 - today.getDate())) % 7));
   const dd = String(today.getDate()).padStart(2, "0");
+  const lastMon = String(today.getDate() - 5).padStart(2, "0");
   const mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
   const yyyy = today.getFullYear();
 
-  return `${yyyy}-${mm}-${dd}`;
+  return [`${yyyy}-${mm}-${lastMon}`, `${yyyy}-${mm}-${dd}`];
 }
 
 function tasksBoilerplate() {
@@ -123,11 +124,5 @@ function tasksBoilerplate() {
   return container;
 }
 
-export {
-  createTask,
-  convertDate,
-  getTodayDate,
-  getNextSaturday,
-  tasksBoilerplate,
-};
+export { createTask, convertDate, getTodayDate, getThisWeek, tasksBoilerplate };
 export default createElement;

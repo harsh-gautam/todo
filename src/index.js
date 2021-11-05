@@ -12,7 +12,7 @@ import createElement, {
   convertDate,
   getTodayDate,
   tasksBoilerplate,
-  getNextSaturday,
+  getThisWeek,
 } from "./utility";
 
 // Add new task to DOM
@@ -154,8 +154,10 @@ function setupWeeklyScreen() {
   content.appendChild(tasksBoilerplate());
 
   const tasks = getAllTasks();
-  const nextSaturday = getNextSaturday();
-  const weeklyTasks = tasks.filter((task) => task.dueDate < nextSaturday);
+  const [lastMonday, nextSaturday] = getThisWeek();
+  const weeklyTasks = tasks.filter(
+    (task) => task.dueDate >= lastMonday && task.dueDate <= nextSaturday
+  );
   weeklyTasks.map((task) => addTaskToDOM(task));
   content.style.opacity = 1;
   // addTaskToDOM(todayTasks);
