@@ -25,35 +25,15 @@ function createWelcomeDiv() {
   return welcomeDiv;
 }
 
-function createButtonGroup() {
-  const iTag = createElement("i", ["bi", "bi-plus-circle"]);
-
-  //task button
-  const btnTask = createElement("button", ["create-task"]);
-  btnTask.append(iTag, "Task");
-
-  //workspace button
-  const btnWorkspace = createElement("button", ["create-workspace"]);
-  btnWorkspace.append(iTag.cloneNode(), "Workspace");
-
-  // buttons group
-  const btnGroup = createElement("div", ["btn-group"]);
-  btnGroup.append(btnTask, btnWorkspace);
-
-  return btnGroup;
-}
-
 function createInsightsDiv() {
   // Insights div
   const todayCard = createCard("Today", "3 tasks pending");
   const weekCard = createCard("This Week", "12 tasks pending");
-  const project1Card = createCard("Project 1", "21 tasks pending");
-  const project2Card = createCard("Project 2", "13 tasks pending");
 
   const insightsDiv = createElement("div", ["insights"]);
-  insightsDiv.append(todayCard, weekCard, project1Card, project2Card);
+  insightsDiv.append(todayCard, weekCard);
 
   return insightsDiv;
 }
 
-export { createWelcomeDiv, createButtonGroup, createInsightsDiv, createCard };
+export { createWelcomeDiv, createInsightsDiv, createCard };

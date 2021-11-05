@@ -6,7 +6,7 @@ import {
   getTaskFromDB,
   updateStatus,
 } from "./db";
-import { createButtonGroup, createWelcomeDiv, createInsightsDiv } from "./home";
+import { createWelcomeDiv, createInsightsDiv } from "./home";
 import createElement, {
   createTask,
   convertDate,
@@ -74,14 +74,17 @@ function updateData(event) {
 function removeTaskFromDOM(target) {
   const taskContainer = document.querySelector(".tasks");
   taskContainer.removeChild(target);
+
   removeFromLocal(target.id);
 }
 
 function loadTasks() {
-  const taskContainer = document.querySelector(".tasks");
+  const taskContainer = document.querySelector(".tasks-container");
   taskContainer.innerHTML = "";
-  const data = loadFromLocal();
-
+  let data = loadFromLocal();
+  data = data.filter((d) => d.status == false);
+  const tasks = createElement("div", ["tasks"]);
+  taskContainer.appendChild(tasks);
   for (let d of data) {
     addTaskToDOM(d);
   }
@@ -98,6 +101,7 @@ function editTask(id) {
 }
 
 function setupListeners() {
+  // TODO: create only a single create task button on sidebar
   const createTask = document.querySelector("div.tasks-toolbar > button");
   const editBtns = document.querySelectorAll(
     ".task > span > .bi-pencil-square"
@@ -172,9 +176,13 @@ function setupHome() {
   console.log("Setup");
   // Home section
   const section = createElement("section", ["home-container"]);
-  section.append(createWelcomeDiv(), createButtonGroup(), createInsightsDiv());
+  section.append(createWelcomeDiv(), createInsightsDiv());
 
   content.appendChild(section);
+
+  const sectionTasks = createElement("section", ["tasks-container"]);
+  content.appendChild(sectionTasks);
+  loadTasks();
   content.style.opacity = 1;
 }
 
